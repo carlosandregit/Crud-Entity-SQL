@@ -16,15 +16,25 @@
             background-color: white;
             width: 100vw;
         }
+        #img{
+            text-align: center;
+        }
+        .botoes{
+            padding: 0.5rem 1rem;
+            margin-left: 10px;
+        }
     </style>
 </head>
 <body>
     <form id="form1" runat="server">
-        <div id="princi">
-            <asp:Button ID="btnFornecedor" runat="server" Text="Fornecedor" OnClick="btnFornecedor_Click" Width="200px"/>
-            <asp:Button ID="btnProduto" runat="server" Text="Produto" OnClick="btnProduto_Click" Width="200px"/>
-            <asp:Button ID="btnPedido" runat="server" Text="Pedidos" OnClick="btnPedido_Click" Width="200px"/>
-            
+       
+        <div id="img">
+            <img src="img/download.png"/>
+        </div>
+         <div id="princi">
+            <asp:Button ID="btnFornecedor" runat="server" cssClass="botoes" Text="Fornecedor" OnClick="btnFornecedor_Click" Width="200px"/>
+            <asp:Button ID="btnProduto" runat="server" cssClass="botoes" Text="Produto" OnClick="btnProduto_Click" Width="200px"/>
+            <asp:Button ID="btnPedido" runat="server" cssClass="botoes" Text="Pedidos" OnClick="btnPedido_Click" Width="200px"/>            
         </div>
     </form>
 </body>
