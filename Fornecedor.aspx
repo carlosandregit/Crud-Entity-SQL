@@ -25,7 +25,7 @@
         .pricipal {
             display: flex;
             flex-direction: row;
-            height: 25vh;
+            height: 23vh;
         }
 
         .label {
@@ -58,8 +58,7 @@
                     <asp:Label ID="lblazaoSocial" runat="server" Text="Razão Social:"></asp:Label>
                     <asp:Label ID="lblCNPJ" runat="server" Text="CNPJ:"></asp:Label>
                     <asp:Label ID="lblUF" runat="server" Text="UF:"></asp:Label>
-                    <asp:Label ID="lblEmail" runat="server" Text="Email:"></asp:Label>
-                    <asp:Label ID="lblContato" runat="server" Text="Contato:"></asp:Label>
+                    <asp:Label ID="lblEmail" runat="server" Text="Email Contato:"></asp:Label>           
                     <asp:Label ID="lblNomeContato" runat="server" Text="Nome Contato:"></asp:Label>
                 </div>
                 <div class="input">
@@ -67,7 +66,6 @@
                     <asp:TextBox ID="txtCNPJ" runat="server" Width="100px"></asp:TextBox>
                     <asp:TextBox ID="txtUF" runat="server" Width="40px"></asp:TextBox>
                     <asp:TextBox ID="txtEmail" runat="server" Width="350px"></asp:TextBox>
-                    <asp:TextBox ID="txtContato" runat="server" Width="80px"></asp:TextBox>
                     <asp:TextBox ID="txtNomeContato" runat="server" Width="350px"></asp:TextBox>
 
                 </div>
