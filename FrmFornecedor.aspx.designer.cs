@@ -11,7 +11,7 @@ namespace WebApplication1
 {
 
 
-    public partial class Pedido
+    public partial class FrmFornecedor
     {
 
         /// <summary>
@@ -24,112 +24,112 @@ namespace WebApplication1
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
-        /// Controle lblCodigoPedido.
+        /// Controle lblFornecedor.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblCodigoPedido;
+        protected global::System.Web.UI.WebControls.Label lblFornecedor;
 
         /// <summary>
-        /// Controle lblDtPedido.
+        /// Controle lblazaoSocial.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblDtPedido;
+        protected global::System.Web.UI.WebControls.Label lblazaoSocial;
 
         /// <summary>
-        /// Controle lblProdutoPedido.
+        /// Controle lblCNPJ.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblProdutoPedido;
+        protected global::System.Web.UI.WebControls.Label lblCNPJ;
 
         /// <summary>
-        /// Controle lblDtProduto.
+        /// Controle lblUF.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblDtProduto;
+        protected global::System.Web.UI.WebControls.Label lblUF;
 
         /// <summary>
-        /// Controle lblFornecedorPedido.
+        /// Controle lblEmail.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblFornecedorPedido;
+        protected global::System.Web.UI.WebControls.Label lblEmail;
 
         /// <summary>
-        /// Controle lblVlTotalPedido.
+        /// Controle lblNomeContato.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblVlTotalPedido;
+        protected global::System.Web.UI.WebControls.Label lblNomeContato;
 
         /// <summary>
-        /// Controle txtCodigoPedido.
+        /// Controle txtIdFornecedor.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCodigoPedido;
+        protected global::System.Web.UI.WebControls.TextBox txtIdFornecedor;
 
         /// <summary>
-        /// Controle txtDtPedido.
+        /// Controle txtRazaoSocial.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDtPedido;
+        protected global::System.Web.UI.WebControls.TextBox txtRazaoSocial;
 
         /// <summary>
-        /// Controle txtDtCadastroProduto.
+        /// Controle txtCNPJ.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDtCadastroProduto;
+        protected global::System.Web.UI.WebControls.TextBox txtCNPJ;
 
         /// <summary>
-        /// Controle txtProdutoPedido.
+        /// Controle txtUF.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtProdutoPedido;
+        protected global::System.Web.UI.WebControls.TextBox txtUF;
 
         /// <summary>
-        /// Controle txtFornecedorPedido.
+        /// Controle txtEmail.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFornecedorPedido;
+        protected global::System.Web.UI.WebControls.TextBox txtEmail;
 
         /// <summary>
-        /// Controle txtVlTotalPedido.
+        /// Controle txtNomeContato.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtVlTotalPedido;
+        protected global::System.Web.UI.WebControls.TextBox txtNomeContato;
 
         /// <summary>
         /// Controle btnVoltar.
@@ -166,5 +166,32 @@ namespace WebApplication1
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnDeletar;
+
+        /// <summary>
+        /// Controle btnInserir.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnInserir;
+
+        /// <summary>
+        /// Controle btnLimpar.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnLimpar;
+
+        /// <summary>
+        /// Controle gdvGridview.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gdvGridview;
     }
 }

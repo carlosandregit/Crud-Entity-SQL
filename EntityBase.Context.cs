@@ -13,24 +13,20 @@ namespace WebApplication1
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class BDCADASTROEntities : DbContext
+    public partial class BDCADASTROEntitiesContext : DbContext
     {
-        public BDCADASTROEntities()
-            : base("name=BDCADASTROEntities")
+        public BDCADASTROEntitiesContext()
+            : base("name=BDCADASTROEntitiesContext")
         {
         }
-
+    
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Fornecedor>().ToTable("Fornecedor");
+            throw new UnintentionalCodeFirstException();
         }
-
-
-
-        //public virtual DbSet<Books> Books { get; set; }
-        //public virtual DbSet<CLIENTE> CLIENTE { get; set; }
-        public virtual DbSet<Fornecedor> Fornecedores { get; set; }
-        public virtual DbSet<Pedido> Pedidos { get; set; }
-        public virtual DbSet<Produto> Produtos { get; set; }
+    
+        public virtual DbSet<Fornecedor> Fornecedor { get; set; }
+        public virtual DbSet<Pedidos> Pedidos { get; set; }
+        public virtual DbSet<Produto> Produto { get; set; }
     }
 }

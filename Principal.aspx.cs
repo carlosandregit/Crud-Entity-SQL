@@ -16,17 +16,17 @@ namespace WebApplication1
 
         protected void btnFornecedor_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Fornecedor.aspx");
+            Response.Redirect("FrmFornecedor.aspx");
         }
 
         protected void btnProduto_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Produto.aspx");
+            Response.Redirect("FrmProduto.aspx");
         }
 
         protected void btnPedido_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Pedido.aspx");
+            Response.Redirect("FrmPedido.aspx");
         }
     }
 }

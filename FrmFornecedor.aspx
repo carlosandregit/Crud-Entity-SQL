@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Fornecedor.aspx.cs" Inherits="WebApplication1.Fornecedor" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="FrmFornecedor.aspx.cs" Inherits="WebApplication1.FrmFornecedor" %>
 
 <!DOCTYPE html>
 <%--Razão Social, CNPJ, UF, Email Contato e Nome Contato--%>
@@ -42,8 +42,14 @@
 
         .btn {
             padding: 0.3rem 0.5rem;
-            margin-left: -10px;
+            margin-left: 108px;
         }
+        .grid{
+           display: flex;
+           margin-left: 108px;
+           flex-direction: column;
+        }
+
     </style>
 </head>
 <body>
@@ -55,6 +61,7 @@
             <div class="pricipal">
 
                 <div class="label">
+                    <asp:Label ID="lblFornecedor" runat="server" Text="ID Fornecedor:"></asp:Label>
                     <asp:Label ID="lblazaoSocial" runat="server" Text="Razão Social:"></asp:Label>
                     <asp:Label ID="lblCNPJ" runat="server" Text="CNPJ:"></asp:Label>
                     <asp:Label ID="lblUF" runat="server" Text="UF:"></asp:Label>
@@ -62,6 +69,7 @@
                     <asp:Label ID="lblNomeContato" runat="server" Text="Nome Contato:"></asp:Label>
                 </div>
                 <div class="input">
+                    <asp:TextBox ID="txtIdFornecedor" runat="server" Width="40px" type="number"></asp:TextBox>
                     <asp:TextBox ID="txtRazaoSocial" runat="server" Width="350px"></asp:TextBox>
                     <asp:TextBox ID="txtCNPJ" runat="server" Width="100px"></asp:TextBox>
                     <asp:TextBox ID="txtUF" runat="server" Width="40px"></asp:TextBox>
@@ -75,8 +83,25 @@
                 <asp:Button ID="btnConsultar" runat="server" Text="Consultar" OnClick="btnConsultar_Click" />
                 <asp:Button ID="btnAlterar" runat="server" Text="Alterar" OnClick="btnAlterar_Click" />
                 <asp:Button ID="btnDeletar" runat="server" Text="Deletar" OnClick="btnDeletar_Click" />
+                <asp:Button ID="btnInserir" runat="server" Text="Inserir" OnClick="Inserir_Click" />
+                <asp:Button ID="btnLimpar" runat="server" Text="Limpar" OnClick="Limpar_Click" />
+            </div>
+            <br /><br />
+            <div class="grid">
+                <asp:GridView ID="gdvGridview" runat="server" AutoGenerateColumns="false" >
+                    <Columns>
+                        <asp:BoundField DataField="RazaoSocial" HeaderText="RazaoSocial" ItemStyle-Width="80" ItemStyle-HorizontalAlign="Center"/>
+                        <asp:BoundField DataField="IdFornecedor" HeaderText="IdFornecedor" ItemStyle-Width="80" ItemStyle-HorizontalAlign="Center"/>
+                        <asp:BoundField DataField="CNPJ" HeaderText="CNPJ" ItemStyle-Width="80" ItemStyle-HorizontalAlign="Center"/>
+                        <asp:BoundField DataField="UF" HeaderText="UF" ItemStyle-Width="80" ItemStyle-HorizontalAlign="Center"/>
+                        <asp:BoundField DataField="EmailContato" HeaderText="EmailContato" ItemStyle-Width="80" ItemStyle-HorizontalAlign="Center"/>
+                        <asp:BoundField DataField="NomeContato" HeaderText="NomeContato" ItemStyle-Width="80" ItemStyle-HorizontalAlign="Center"/>
+                    </Columns>
+                    
+                </asp:GridView>
             </div>
         </div>
+        
     </form>
 </body>
 </html>
