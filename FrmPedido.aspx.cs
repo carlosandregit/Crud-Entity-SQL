@@ -32,9 +32,7 @@ namespace WebApplication1
 
                 if (pedidos == null)
                     pedidos = new Pedidos();
-            }
-
-            
+            }            
         }
         protected void btnVoltar_Click(object sender, EventArgs e)
         {
@@ -42,95 +40,137 @@ namespace WebApplication1
         }
         public void Consulta(int id)
         {
-            pedidoRepository = new PedidoRepository();
-            var result = pedidoRepository.ConsultarPorID(id);
-
-            if (result != null)
+            try
             {
-                //txtCodigoPedido.Text = result.CodigoPedido.ToString();
-                //txtDtPedido.Text =  result.DtPedido.ToString();
-                ////txtProduto.Text = result.Produto.ToString();
-                //txtQtProduto.Text = result.QtProduto.ToString();
-                ////txtFornecedorPedido.Text = result.Fornecedor.ToString();
-                //txtVlTotalPedido.Text = result.VlrTotalPedido.ToString();
+               
+                pedidoRepository = new PedidoRepository();
+                var result = pedidoRepository.ConsultarPorID(id);
 
-                gdvGridview.DataSource = result;
-                gdvGridview.DataBind();
+                if (result != null)
+                {                  
+                    gdvGridview.DataSource = result;
+                    gdvGridview.DataBind();
+                }
+                else
+                {
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Sem Registro') ", true);
+                    LimparTela();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Sem Registro') ", true);
-                LimparTela();
+                throw new Exception("Erro, procure a equipe técnica: " + ex.Message);
             }
-
         }        
 
         protected void btnConsultar_Click(object sender, EventArgs e)
         {
-            if (txtCodigoPedido.Text != "")
+            try
             {
-                Consulta(int.Parse(txtCodigoPedido.Text));
+                if (txtCodigoPedido.Text != "")
+                {
+                    Consulta(int.Parse(txtCodigoPedido.Text));
+                }
+                else
+                    ConsultarSemId();
             }
-            else
-                ConsultarSemId();
+            catch (Exception ex)
+            {
+                throw new Exception("Erro, procure a equipe técnica: " + ex.Message);
+            }
         }
 
         protected void ConsultarSemId()
         {
-            pedidoRepository = new PedidoRepository();
-            var result = pedidoRepository.Consult();
+            try
+            {
+                pedidoRepository = new PedidoRepository();
+                var result = pedidoRepository.Consult();
 
-            gdvGridview.DataSource = result;
-            gdvGridview.DataBind();
+                gdvGridview.DataSource = result;
+                gdvGridview.DataBind();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro, procure a equipe técnica: " + ex.Message);
+            }
         }
         protected void btnAlterar_Click(object sender, EventArgs e)
         {
-            if (txtCodigoPedido.Text != "")
+            try
             {
-                pedidoRepository = new PedidoRepository();
-                var result = pedidoRepository.AlterarPorId(int.Parse(txtCodigoPedido.Text), Convert.ToDateTime(txtDtPedido.Text), int.Parse(ddlProduto.SelectedValue), int.Parse(txtQtProduto.Text), int.Parse(ddlFornecedorPedido.SelectedValue), Convert.ToDecimal(txtVlTotalPedido.Text));
-                if (result != null)
+                if (txtCodigoPedido.Text != "")
                 {
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Alterado com sucesso') ", true);
-                    Consulta(result.CodigoPedido);
+                    pedidoRepository = new PedidoRepository();
+                    var result = pedidoRepository.AlterarPorId(int.Parse(txtCodigoPedido.Text), Convert.ToDateTime(txtDtPedido.Text), int.Parse(ddlProduto.SelectedValue), int.Parse(txtQtProduto.Text), int.Parse(ddlFornecedorPedido.SelectedValue), Convert.ToDecimal(txtVlTotalPedido.Text));
+                    if (result != null)
+                    {
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Alterado com sucesso') ", true);
+                        Consulta(result.CodigoPedido);
+                    }
+                    else
+                    {
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Erro ao alterar') ", true);
+                        LimparTela();
+                    }
                 }
                 else
-                {
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Erro ao alterar') ", true);
-                    LimparTela();
-                }
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('É precisa informar código do pedido') ", true);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro, procure a equipe técnica: " + ex.Message);
             }
         }
 
         protected void btnDeletar_Click(object sender, EventArgs e)
         {
-            pedidoRepository = new PedidoRepository();
-
-            var result = pedidoRepository.DeletarRegistro(int.Parse(txtCodigoPedido.Text));
-
-            if (result != null)
+            try
             {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Erro ao excluir') ", true);
-                LimparTela();
+                if (txtCodigoPedido.Text != "")
+                {
+                    pedidoRepository = new PedidoRepository();
+
+                    var result = pedidoRepository.DeletarRegistro(int.Parse(txtCodigoPedido.Text));
+
+                    if (result != null)
+                    {
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Excluido com sucesso') ", true);
+                        LimparTela();
+                    }
+                    else
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Erro ao excluir') ", true);
+                }
+                else
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('É precisa informar o código do pedido') ", true);
             }
-            else
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Excluido com sucesso') ", true);
+            catch(Exception ex)
+            {
+                throw new Exception("Erro, procure a equipe técnica: " + ex.Message);
+            }
         }
 
         protected void btnInserir_Click(object sender, EventArgs e)
-        {            
-            pedidoRepository = new PedidoRepository();
-            pedidos.DtPedido = Convert.ToDateTime(txtDtPedido.Text);
-            pedidos.QtProduto = int.Parse(txtQtProduto.Text);
-            pedidos.Fornecedor = Convert.ToInt32(ddlFornecedorPedido.SelectedValue);
-    
-            var result = pedidoRepository.InserRegistro(pedidos);
-            if (result != null)
+        {
+            try
             {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Inserido com sucesso') ", true);
+                pedidoRepository = new PedidoRepository();
+                pedidos.DtPedido = Convert.ToDateTime(txtDtPedido.Text);
+                pedidos.QtProduto = int.Parse(txtQtProduto.Text);
+                pedidos.Fornecedor = Convert.ToInt32(ddlFornecedorPedido.SelectedValue);
+
+                var result = pedidoRepository.InserRegistro(pedidos);
+                if (result != null)
+                {
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Inserido com sucesso') ", true);
+                }
+                else
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Erro ao inserir') ", true);
             }
-            else
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Erro ao inserir') ", true);
+            catch(Exception ex)
+            {
+                throw new Exception("Erro, procure a equipe técnica: " + ex.Message);
+            }
         }
 
         protected void btnLimpar_Click(object sender, EventArgs e)
@@ -151,20 +191,24 @@ namespace WebApplication1
             if(pedidos != null)
             {
                 pedidos.Produtos.Clear();
-            }
-            
-          
+            }                    
         }
 
         protected void btnAdd_Click(object sender, EventArgs e)
         {
-            produtoRepository = new ProdutoRepository();
-            var produto = produtoRepository.ConsultarPorID(Convert.ToInt32(ddlProduto.SelectedValue));
-            var quantidade = int.Parse(txtQtProduto.Text);
-            var subtotal = Convert.ToDecimal(txtVlTotalPedido.Text) + quantidade * produto.ValorProduto;
-            txtVlTotalPedido.Text = subtotal.ToString();
-            pedidos.Produtos.Add(new DTO.ItemPedidoDTO() { Produto = produto, Quantidade = quantidade});
-
+            try
+            {
+                produtoRepository = new ProdutoRepository();
+                var produto = produtoRepository.ConsultarPorID(Convert.ToInt32(ddlProduto.SelectedValue));
+                var quantidade = int.Parse(txtQtProduto.Text);
+                var subtotal = Convert.ToDecimal(txtVlTotalPedido.Text) + quantidade * produto.ValorProduto;
+                txtVlTotalPedido.Text = Math.Round(Convert.ToDouble(subtotal)).ToString("N2");
+                pedidos.Produtos.Add(new DTO.ItemPedidoDTO() { Produto = produto, Quantidade = quantidade });
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro, procure a equipe técnica: "+ ex.Message);
+            }           
         }
     }
 }

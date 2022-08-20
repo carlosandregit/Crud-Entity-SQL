@@ -127,7 +127,6 @@
     <form id="form1" runat="server">
         <div class="center">
             <div class="pricipal">
-                <%--Código, Descrição, Data do Cadastro, Valor do Produto--%>
                 <div class="label">
                     <asp:Label ID="lblCodigo" runat="server" Text="Código:"></asp:Label>
                     <asp:Label ID="lblDescricao" runat="server" Text="Descrição:"></asp:Label>
@@ -138,7 +137,7 @@
                 <div class="input">
                     <asp:TextBox ID="txtCodigoProduto" runat="server" Width="100px" type="number"></asp:TextBox>
                     <asp:TextBox ID="txtDescricaoProduto" runat="server" Width="350px"></asp:TextBox>
-                    <asp:TextBox ID="txtDtCadastroProduto" runat="server" Width="100px" maxlength="10" onkeypress="mascaraData(this)"></asp:TextBox>
+                    <asp:TextBox ID="txtDtCadastroProduto" runat="server" Width="100px" maxlength="10" onkeypress="mascaraData(this)" Enabled="false"></asp:TextBox>
                     <asp:TextBox ID="txtValorProduto" runat="server" Width="100px"></asp:TextBox>
 
                 </div>
@@ -153,13 +152,8 @@
             </div>
             <br /><br />
               <div class="grid">
-                <asp:GridView ID="gdvGridview" runat="server" AutoGenerateColumns="false" >
-                    <Columns>
-                        <asp:BoundField DataField="Codigo" HeaderText="CodigoProduto" ItemStyle-Width="80" ItemStyle-HorizontalAlign="Center"/>
-                        <asp:BoundField DataField="Descricao" HeaderText="DescricaoProduto" ItemStyle-Width="80" ItemStyle-HorizontalAlign="Center"/>
-                        <asp:BoundField DataField="DtCadastro" HeaderText="DtCadastroProduto" ItemStyle-Width="80" ItemStyle-HorizontalAlign="Center"/>
-                        <asp:BoundField DataField="ValorProduto" HeaderText="ValorProduto" ItemStyle-Width="80" ItemStyle-HorizontalAlign="Center"/>                      
-                    </Columns>                    
+                <asp:GridView ID="gdvGridview" runat="server" AutoGenerateColumns="true" >
+                                        
                 </asp:GridView>
             </div>
         </div>

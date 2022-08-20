@@ -24,95 +24,140 @@ namespace WebApplication1
 
         public void Consulta(int id)
         {
-            fornecedorRepository = new FornecedorRepository();
-            var result = fornecedorRepository.ConsultarPorID(id);
-
-            if (result != null)
-            {
-                txtIdFornecedor.Text = result.IdFornecedor.ToString();
-                txtRazaoSocial.Text = result.RazaoSocial;
-                txtCNPJ.Text = result.CNPJ.ToString();
-                txtUF.Text = result.UF.ToString();
-                txtEmail.Text = result.EmailContato.ToString();
-                txtNomeContato.Text = result.NomeContato.ToString();
-
-            }
-            else
-            {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Sem Registro') ", true);
-                LimparTela();
-            }               
-
-        }
-        protected void btnConsultar_Click(object sender, EventArgs e)
-        {
-            if (txtIdFornecedor.Text != "")
-                Consulta(int.Parse(txtIdFornecedor.Text));
-            else
-                ConsultarSemId();
-        }
-        protected void ConsultarSemId()
-        {
-            fornecedorRepository = new FornecedorRepository();
-            var result = fornecedorRepository.Consult();
-
-            gdvGridview.DataSource = result;
-            gdvGridview.DataBind();
-        }
-        protected void btnAlterar_Click(object sender, EventArgs e)
-        {
-            if (txtIdFornecedor.Text != "")
+            try
             {
                 fornecedorRepository = new FornecedorRepository();
-                var result = fornecedorRepository.AlterarPorId(int.Parse(txtIdFornecedor.Text), txtRazaoSocial.Text, txtCNPJ.Text, txtUF.Text, txtEmail.Text, txtNomeContato.Text);
+                var result = fornecedorRepository.ConsultarPorID(id);
+
                 if (result != null)
                 {
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Alterado com sucesso') ", true);
-                    Consulta(result.IdFornecedor);
+                    txtIdFornecedor.Text = result.IdFornecedor.ToString();
+                    txtRazaoSocial.Text = result.RazaoSocial;
+                    txtCNPJ.Text = result.CNPJ.ToString();
+                    txtUF.Text = result.UF.ToString();
+                    txtEmail.Text = result.EmailContato.ToString();
+                    txtNomeContato.Text = result.NomeContato.ToString();
+
                 }
                 else
                 {
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Erro ao alterar') ", true);
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Sem Registro') ", true);
                     LimparTela();
                 }
             }
-            else
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('É preciso informar o ID Fornecedor') ", true);
+            catch (Exception ex)
+            {
+                throw new Exception("Erro, procure a equipe técnica: " + ex.Message);
+            }
+        }
+        protected void btnConsultar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (txtIdFornecedor.Text != "")
+                    Consulta(int.Parse(txtIdFornecedor.Text));
+                else
+                    ConsultarSemId();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro, procure a equipe técnica: " + ex.Message);
+            }
+        }
+        protected void ConsultarSemId()
+        {
+            try
+            {
+                fornecedorRepository = new FornecedorRepository();
+                var result = fornecedorRepository.Consult();
+
+                gdvGridview.DataSource = result;
+                gdvGridview.DataBind();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro, procure a equipe técnica: " + ex.Message);
+            }
+        }
+        protected void btnAlterar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (txtIdFornecedor.Text != "")
+                {
+                    fornecedorRepository = new FornecedorRepository();
+                    var result = fornecedorRepository.AlterarPorId(int.Parse(txtIdFornecedor.Text), txtRazaoSocial.Text, txtCNPJ.Text, txtUF.Text, txtEmail.Text, txtNomeContato.Text);
+                    if (result != null)
+                    {
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Alterado com sucesso') ", true);
+                        Consulta(result.IdFornecedor);
+                    }
+                    else
+                    {
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Erro ao alterar') ", true);
+                        LimparTela();
+                    }
+                }
+                else
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('É preciso informar o ID Fornecedor e consultar para carregar as informações') ", true);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro, procure a equipe técnica: " + ex.Message);
+            }
         }
 
         protected void btnDeletar_Click(object sender, EventArgs e)
         {
-            fornecedorRepository = new FornecedorRepository();  
-            
-            if(txtIdFornecedor.Text != "")
+            try
             {
-                var result = fornecedorRepository.DeletarRegistro(int.Parse(txtIdFornecedor.Text));
-
-                if (result != null)
+                if (txtIdFornecedor.Text != "")
                 {
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Erro ao excluir') ", true);
-                    LimparTela();
+                    fornecedorRepository = new FornecedorRepository();
+                    var result = fornecedorRepository.DeletarRegistro(int.Parse(txtIdFornecedor.Text));
+
+                    if (result != null)
+                    {
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Excluido com sucesso') ", true);
+
+                        LimparTela();
+                    }
+                    else
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Erro ao excluir') ", true);
                 }
                 else
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Excluido com sucesso') ", true);
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Precisa Informa o ID fornecedor e consultar para carregar as informações') ", true);
+
             }
-            else
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Preciso Informa o ID fornecedor') ", true);
-
-
+            catch (Exception ex)
+            {
+                throw new Exception("Erro, procure a equipe técnica: " + ex.Message);
+            }
         }
 
         protected void Inserir_Click(object sender, EventArgs e)
         {
-            fornecedorRepository = new FornecedorRepository();
-            var result = fornecedorRepository.InserRegistro(txtRazaoSocial.Text, txtCNPJ.Text, txtUF.Text, txtEmail.Text, txtNomeContato.Text);
-            if (result != null)
+            try
             {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Inserido com sucesso') ", true);
-                Consulta(result.IdFornecedor);
+                if (txtRazaoSocial.Text != "" && txtCNPJ.Text != "" && txtUF.Text != "" && txtEmail.Text != "" && txtNomeContato.Text != "")
+                {
+                    fornecedorRepository = new FornecedorRepository();
+                    var result = fornecedorRepository.InserRegistro(txtRazaoSocial.Text, txtCNPJ.Text, txtUF.Text, txtEmail.Text, txtNomeContato.Text);
+                    if (result != null)
+                    {
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Inserido com sucesso') ", true);
+                        Consulta(result.IdFornecedor);
+                    }
+                    else
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Erro ao inserir') ", true);
+                }
+                else
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('É necessário preencher os campos, menos o ID fornecedor') ", true);
             }
-            else
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Erro ao inserir') ", true);
+            catch (Exception ex)
+            {
+                throw new Exception("Erro, procure a equipe técnica: " + ex.Message);
+            }
         }
 
         protected void Limpar_Click(object sender, EventArgs e)

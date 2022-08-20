@@ -14,7 +14,8 @@ namespace WebApplication1
      
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+                txtDtCadastroProduto.Text = DateTime.Now.ToString("dd-MM-yyyy");            
         }
 
         protected void btnVoltar_Click(object sender, EventArgs e)
@@ -24,85 +25,127 @@ namespace WebApplication1
 
         public void Consulta(int id)
         {
-            produtoRepository = new ProdutoRepository();
-            var result = produtoRepository.ConsultarPorID(id);
-           
-            if (result != null)
+            try
             {
-                var date = Convert.ToDateTime(result.DtCadastro).ToString("dd-MM-yyyy");
-                txtCodigoProduto.Text = result.Codigo.ToString();
-                txtDescricaoProduto.Text = result.Descricao;
-                txtDtCadastroProduto.Text = date;
-                txtValorProduto.Text = Math.Round(Convert.ToDouble(result.ValorProduto), 3).ToString("N2");        
+                produtoRepository = new ProdutoRepository();
+                var result = produtoRepository.ConsultarPorID(id);
+
+                if (result != null)
+                {
+                    var date = Convert.ToDateTime(result.DtCadastro).ToString("dd-MM-yyyy");
+                    txtCodigoProduto.Text = result.Codigo.ToString();
+                    txtDescricaoProduto.Text = result.Descricao;
+                    txtDtCadastroProduto.Text = date;
+                    txtValorProduto.Text = Math.Round(Convert.ToDouble(result.ValorProduto), 3).ToString("N2");
+                }
+                else
+                {
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Sem Registro') ", true);
+                    LimparTela();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Sem Registro') ", true);
-                LimparTela();
+                throw new Exception("Erro, procure a equipe técnica: " + ex.Message);
             }
         }
         protected void btnConsultar_Click(object sender, EventArgs e)
         {
-            if (txtCodigoProduto.Text != "")
+            try
             {
-                Consulta(int.Parse(txtCodigoProduto.Text));
+                if (txtCodigoProduto.Text != "")
+                {
+                    Consulta(int.Parse(txtCodigoProduto.Text));
+                }
+                else
+                    ConsultarSemId();
             }
-            else
-                ConsultarSemId();
+            catch (Exception ex)
+            {
+                throw new Exception("Erro, procure a equipe técnica: " + ex.Message);
+            }
         }
         protected void ConsultarSemId()
         {
-            produtoRepository = new ProdutoRepository();
-            var result = produtoRepository.Consult();
+            try
+            {
+                produtoRepository = new ProdutoRepository();
+                var result = produtoRepository.Consult();
 
-            gdvGridview.DataSource = result;
-            gdvGridview.DataBind();
+                gdvGridview.DataSource = result;
+                gdvGridview.DataBind();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro, procure a equipe técnica: " + ex.Message);
+            }
         }
 
         protected void btnAlterar_Click(object sender, EventArgs e)
         {
-            if (txtCodigoProduto.Text != "")
+            try
             {
-                produtoRepository = new ProdutoRepository();
-                var result = produtoRepository.AlterarPorId(int.Parse(txtCodigoProduto.Text), txtDescricaoProduto.Text, Convert.ToDateTime(txtDtCadastroProduto.Text), Convert.ToDecimal(txtValorProduto.Text));
-                if (result != null)
+                if (txtCodigoProduto.Text != "")
                 {
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Alterado com sucesso') ", true);
-                    Consulta(result.Codigo);
+                    produtoRepository = new ProdutoRepository();
+                    var result = produtoRepository.AlterarPorId(int.Parse(txtCodigoProduto.Text), txtDescricaoProduto.Text, Convert.ToDateTime(txtDtCadastroProduto.Text), Convert.ToDecimal(txtValorProduto.Text));
+                    if (result != null)
+                    {
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Alterado com sucesso') ", true);
+                        Consulta(result.Codigo);
+                    }
+                    else
+                    {
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Erro ao alterar') ", true);
+                        LimparTela();
+                    }
                 }
-                else
-                {
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Erro ao alterar') ", true);
-                    LimparTela();
-                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro, procure a equipe técnica: " + ex.Message);
             }
         }
 
         protected void btnDeletar_Click(object sender, EventArgs e)
         {
-            produtoRepository = new ProdutoRepository();
-
-            var result = produtoRepository.DeletarRegistro(int.Parse(txtCodigoProduto.Text));
-
-            if (result != null)
+            try
             {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Excluido com sucesso') ", true);                
-                LimparTela();
+                produtoRepository = new ProdutoRepository();
+
+                var result = produtoRepository.DeletarRegistro(int.Parse(txtCodigoProduto.Text));
+
+                if (result != null)
+                {
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Excluido com sucesso') ", true);
+                    LimparTela();
+                }
+                else
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Erro ao excluir') ", true);
             }
-            else
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Erro ao excluir') ", true);
+            catch (Exception ex)
+            {
+                throw new Exception("Erro, procure a equipe técnica: " + ex.Message);
+            }
         }
 
         protected void btnInserir_Click(object sender, EventArgs e)
         {
-            produtoRepository = new ProdutoRepository();
-            var result = produtoRepository.InserRegistro(txtDescricaoProduto.Text,Convert.ToDateTime(txtDtCadastroProduto.Text),Convert.ToDecimal(txtValorProduto.Text));
-            if (result != null)
+            try
             {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Inserido com sucesso') ", true);
+                produtoRepository = new ProdutoRepository();
+                var result = produtoRepository.InserRegistro(txtDescricaoProduto.Text, Convert.ToDateTime(txtDtCadastroProduto.Text), Convert.ToDecimal(txtValorProduto.Text));
+                if (result != null)
+                {
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Inserido com sucesso') ", true);
+                }
+                else
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Erro ao inserir') ", true);
             }
-            else
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Erro ao inserir') ", true);
+            catch (Exception ex)
+            {
+                throw new Exception("Erro, procure a equipe técnica: " + ex.Message);
+            }            
         }
 
         protected void btnLimpar_Click(object sender, EventArgs e)
@@ -114,7 +157,7 @@ namespace WebApplication1
         {
             txtCodigoProduto.Text = string.Empty;
             txtDescricaoProduto.Text = string.Empty;
-            txtDtCadastroProduto.Text = string.Empty;
+            txtDtCadastroProduto.Text = DateTime.Now.ToString("dd-MM-yyyy");
             txtValorProduto.Text = string.Empty;
             gdvGridview.DataSource = null;
             gdvGridview.DataBind();

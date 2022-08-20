@@ -1,7 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="FrmFornecedor.aspx.cs" Inherits="WebApplication1.FrmFornecedor" %>
 
 <!DOCTYPE html>
-<%--Razão Social, CNPJ, UF, Email Contato e Nome Contato--%>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -46,10 +45,9 @@
         }
         .grid{
            display: flex;
-           margin-left: 108px;
+           margin-left: 107px;
            flex-direction: column;
         }
-
     </style>
 </head>
 <body>
@@ -71,7 +69,7 @@
                 <div class="input">
                     <asp:TextBox ID="txtIdFornecedor" runat="server" Width="40px" type="number"></asp:TextBox>
                     <asp:TextBox ID="txtRazaoSocial" runat="server" Width="350px"></asp:TextBox>
-                    <asp:TextBox ID="txtCNPJ" runat="server" Width="100px"></asp:TextBox>
+                    <asp:TextBox ID="txtCNPJ" runat="server" Width="150px"></asp:TextBox>
                     <asp:TextBox ID="txtUF" runat="server" Width="40px"></asp:TextBox>
                     <asp:TextBox ID="txtEmail" runat="server" Width="350px"></asp:TextBox>
                     <asp:TextBox ID="txtNomeContato" runat="server" Width="350px"></asp:TextBox>
@@ -85,16 +83,13 @@
                 <asp:Button ID="btnDeletar" runat="server" Text="Deletar" OnClick="btnDeletar_Click" />
                 <asp:Button ID="btnInserir" runat="server" Text="Inserir" OnClick="Inserir_Click" />
                 <asp:Button ID="btnLimpar" runat="server" Text="Limpar" OnClick="Limpar_Click" />
-            </div>
-            <br /><br />
-            <div class="grid">
-                <asp:GridView ID="gdvGridview" runat="server" AutoGenerateColumns="true" >
-                 
-                    
-                </asp:GridView>
-            </div>
+            </div>                    
         </div>
-        
+        <br /><br />
+        <div class="grid">
+            <asp:GridView ID="gdvGridview" runat="server" AutoGenerateColumns="true">
+            </asp:GridView>
+        </div>
     </form>
 </body>
 </html>

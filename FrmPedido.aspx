@@ -55,7 +55,6 @@
     <form id="form1" runat="server">
         <div class="center">
             <div class="pricipal">
-                <%--Código do pedido, Data do pedido,Produto, Quantidade de Produtos, Fornecedor, Valor Total do Pedido;--%>
                 <div class="label">
                     <asp:Label ID="lblCodigoPedido" runat="server" Text="Código do pedido:"></asp:Label>
                     <asp:Label ID="lblDtPedido" runat="server" Text="Data do pedido:"></asp:Label>
