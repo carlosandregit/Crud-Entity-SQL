@@ -117,7 +117,11 @@ namespace WebApplication1
         protected void btnInserir_Click(object sender, EventArgs e)
         {
             pedidoRepository = new PedidoRepository();
-            var result = pedidoRepository.InserRegistro(Convert.ToDateTime(txtDtPedido.Text), int.Parse(ddlProduto.SelectedValue), int.Parse(txtQtProduto.Text), int.Parse(ddlFornecedorPedido.SelectedValue), Convert.ToDecimal(txtVlTotalPedido.Text));
+            pedidos.DtPedido = Convert.ToDateTime(txtDtPedido.Text);
+            pedidos.QtProduto = int.Parse(txtQtProduto.Text);
+            pedidos.Fornecedor1 = new Fornecedor() { IdFornecedor = Convert.ToInt32( ddlFornecedorPedido.SelectedValue)};
+    
+            var result = pedidoRepository.InserRegistro(pedidos);
             if (result != null)
             {
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Inserido com sucesso') ", true);
@@ -144,7 +148,13 @@ namespace WebApplication1
 
         protected void btnAdd_Click(object sender, EventArgs e)
         {
-            pedidos.Produtos.Add(new DTO.ItemPedidoDTO() {Produto = new Produto() { Codigo = Convert.ToInt32(ddlProduto.SelectedValue) }, Quantidade = int.Parse(txtQtProduto.Text)});
+            produtoRepository = new ProdutoRepository();
+            var produto = produtoRepository.ConsultarPorID(Convert.ToInt32(ddlProduto.SelectedValue));
+            var quantidade = int.Parse(txtQtProduto.Text);
+            var subtotal = Convert.ToDecimal(txtVlTotalPedido.Text) + quantidade * produto.ValorProduto;
+            txtVlTotalPedido.Text = subtotal.ToString();
+            pedidos.Produtos.Add(new DTO.ItemPedidoDTO() { Produto = produto, Quantidade = quantidade});
+
         }
     }
 }

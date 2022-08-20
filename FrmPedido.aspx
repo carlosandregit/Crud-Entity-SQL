@@ -66,17 +66,17 @@
 
                 </div>
                 <div class="input">
-                    <asp:TextBox ID="txtCodigoPedido" runat="server" Width="100px"></asp:TextBox>
+                    <asp:TextBox ID="txtCodigoPedido" runat="server" Width="100px" type="number"></asp:TextBox>
                     <asp:TextBox ID="txtDtPedido" runat="server" Width="100px" Enabled="false"></asp:TextBox>
                     <%--<asp:TextBox ID="txtProduto" runat="server" Width="350px"></asp:TextBox>--%>
                     <asp:DropDownList ID="ddlProduto" runat="server" Width="350px"></asp:DropDownList>
                     <div>
-                        <asp:TextBox ID="txtQtProduto" runat="server" Width="100px" type="number"></asp:TextBox>
+                        <asp:TextBox ID="txtQtProduto" runat="server" Width="100px" type="number" Text="1"></asp:TextBox>
                         <asp:Button ID="btnAdd" runat="server" Text="Adcionar Produto" OnClick="btnAdd_Click" UseSubmitBehavior="false" />
                     </div>                    
                     <%--<asp:TextBox ID="txtFornecedorPedido" runat="server" Width="350px"></asp:TextBox>--%>
                     <asp:DropDownList ID="ddlFornecedorPedido" runat="server" Width="350px"></asp:DropDownList>
-                    <asp:TextBox ID="txtVlTotalPedido" runat="server" Width="100px" Enabled="false"></asp:TextBox>
+                    <asp:TextBox ID="txtVlTotalPedido" runat="server" Width="100px" Enabled="false" Text="0"></asp:TextBox>
 
                 </div>
             </div>

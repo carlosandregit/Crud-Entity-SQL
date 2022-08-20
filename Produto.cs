@@ -11,8 +11,7 @@ namespace WebApplication1
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Produto
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,8 +19,7 @@ namespace WebApplication1
         {
             this.Pedidos = new HashSet<Pedidos>();
         }
-        
-        [Key]
+    
         public int Codigo { get; set; }
         public string Descricao { get; set; }
         public Nullable<System.DateTime> DtCadastro { get; set; }

@@ -43,23 +43,26 @@ namespace WebApplication1.Repository
             }
         }
 
-        public Pedidos InserRegistro(DateTime dtPedido, int produto, int qtProduto, int fornecedor, decimal vlrTotalPedido)
+        public Pedidos InserRegistro(Pedidos pedidos)
         {
             using (BDCADASTROEntitiesContext context = new BDCADASTROEntitiesContext())
             {
-                Pedidos p = new Pedidos
-                {
-                    DtPedido = dtPedido,
-                    Produto = produto,
-                    QtProduto = qtProduto,
-                    Fornecedor = fornecedor,
-                    VlrTotalPedido = vlrTotalPedido                 
+                var max = context.Pedidos.Max(p => p.CodigoPedido);
+                if (max == 0)
+                    max = 0;
 
-                };
-                context.Pedidos.Add(p);
+                var codigoPedido = max + 1;
+                pedidos.Produtos.ForEach(item => {
+
+                    pedidos.Produto1 = item.Produto;
+                    pedidos.VlrTotalPedido = item.Quantidade * item.Produto.ValorProduto;
+                    pedidos.CodigoPedido = codigoPedido;
+                    context.Pedidos.Add(pedidos);
+                });             
+                
                 context.SaveChanges();
 
-                return p;
+                return pedidos;
             }
         }
 
