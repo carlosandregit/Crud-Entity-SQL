@@ -7,16 +7,16 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WebApplication1
+namespace WebApplication1.Entity
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class BDCADASTROEntitiesContext : DbContext
+    public partial class BDCADASTROEntities : DbContext
     {
-        public BDCADASTROEntitiesContext()
-            : base("name=BDCADASTROEntitiesContext")
+        public BDCADASTROEntities()
+            : base("name=BDCADASTROEntities")
         {
         }
     

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using WebApplication1.Entity;
 
 namespace WebApplication1.Repository
 {
@@ -9,7 +10,7 @@ namespace WebApplication1.Repository
     {
         public Produto ConsultarPorID(int id)
         {
-            using (BDCADASTROEntitiesContext context = new BDCADASTROEntitiesContext())
+            using (BDCADASTROEntities context = new BDCADASTROEntities())
             {
                 return context.Produto.Find(id);
             }
@@ -17,7 +18,7 @@ namespace WebApplication1.Repository
 
         public Produto AlterarPorId(int id, string descricao, DateTime dtCadastro, decimal valorProduto)
         {
-            using (BDCADASTROEntitiesContext context = new BDCADASTROEntitiesContext())
+            using (BDCADASTROEntities context = new BDCADASTROEntities())
             {
                 //Produto p = context.Produto.FirstOrDefault(x => x.Codigo == id);
                 var tese = Convert.ToDecimal(valorProduto).ToString("f");
@@ -39,7 +40,7 @@ namespace WebApplication1.Repository
 
         public Produto DeletarRegistro(int id)
         {
-            using (BDCADASTROEntitiesContext context = new BDCADASTROEntitiesContext())
+            using (BDCADASTROEntities context = new BDCADASTROEntities())
             {
                 Produto p = context.Produto.FirstOrDefault(x => x.Codigo == id);
                 context.Produto.Remove(p);
@@ -51,7 +52,7 @@ namespace WebApplication1.Repository
 
         public Produto InserRegistro(string descricao, DateTime dtCadastro, decimal valorProduto)
         {
-            using (BDCADASTROEntitiesContext context = new BDCADASTROEntitiesContext())
+            using (BDCADASTROEntities context = new BDCADASTROEntities())
             {
                 Produto p = new Produto
                 {
@@ -69,7 +70,7 @@ namespace WebApplication1.Repository
 
         public List<Produto> Consult()
         {
-            using (BDCADASTROEntitiesContext context = new BDCADASTROEntitiesContext())
+            using (BDCADASTROEntities context = new BDCADASTROEntities())
             {
                 return context.Produto.ToList();
             }

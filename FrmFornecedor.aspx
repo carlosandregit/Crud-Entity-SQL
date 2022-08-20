@@ -88,15 +88,8 @@
             </div>
             <br /><br />
             <div class="grid">
-                <asp:GridView ID="gdvGridview" runat="server" AutoGenerateColumns="false" >
-                    <Columns>
-                        <asp:BoundField DataField="RazaoSocial" HeaderText="RazaoSocial" ItemStyle-Width="80" ItemStyle-HorizontalAlign="Center"/>
-                        <asp:BoundField DataField="IdFornecedor" HeaderText="IdFornecedor" ItemStyle-Width="80" ItemStyle-HorizontalAlign="Center"/>
-                        <asp:BoundField DataField="CNPJ" HeaderText="CNPJ" ItemStyle-Width="80" ItemStyle-HorizontalAlign="Center"/>
-                        <asp:BoundField DataField="UF" HeaderText="UF" ItemStyle-Width="80" ItemStyle-HorizontalAlign="Center"/>
-                        <asp:BoundField DataField="EmailContato" HeaderText="EmailContato" ItemStyle-Width="80" ItemStyle-HorizontalAlign="Center"/>
-                        <asp:BoundField DataField="NomeContato" HeaderText="NomeContato" ItemStyle-Width="80" ItemStyle-HorizontalAlign="Center"/>
-                    </Columns>
+                <asp:GridView ID="gdvGridview" runat="server" AutoGenerateColumns="true" >
+                 
                     
                 </asp:GridView>
             </div>

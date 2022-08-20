@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using WebApplication1.Entity;
 
 namespace WebApplication1.Repository
 {
@@ -9,7 +10,7 @@ namespace WebApplication1.Repository
     {
         public Fornecedor ConsultarPorID(int id)
         {
-            using (BDCADASTROEntitiesContext context = new BDCADASTROEntitiesContext())
+            using (BDCADASTROEntities context = new BDCADASTROEntities())
             {
                 return context.Fornecedor.Find(id);
             }
@@ -17,7 +18,7 @@ namespace WebApplication1.Repository
 
         public Fornecedor AlterarPorId(int id, string razao, string cnpj, string uf, string email, string nome)
         {
-            using (BDCADASTROEntitiesContext context = new BDCADASTROEntitiesContext())
+            using (BDCADASTROEntities context = new BDCADASTROEntities())
             {
                 Fornecedor f = context.Fornecedor.FirstOrDefault(x => x.IdFornecedor == id);
                 f.RazaoSocial = razao;
@@ -33,7 +34,7 @@ namespace WebApplication1.Repository
 
         public Fornecedor DeletarRegistro(int id)
         {
-            using (BDCADASTROEntitiesContext context = new BDCADASTROEntitiesContext())
+            using (BDCADASTROEntities context = new BDCADASTROEntities())
             {
                 Fornecedor f = context.Fornecedor.FirstOrDefault(x => x.IdFornecedor == id);
                 context.Fornecedor.Remove(f);
@@ -45,7 +46,7 @@ namespace WebApplication1.Repository
 
         public Fornecedor InserRegistro(string razao, string cnpj, string uf, string email, string nome)
         {
-            using (BDCADASTROEntitiesContext context = new BDCADASTROEntitiesContext())
+            using (BDCADASTROEntities context = new BDCADASTROEntities())
             {
                 Fornecedor f = new Fornecedor
                 {                    
@@ -65,7 +66,7 @@ namespace WebApplication1.Repository
 
         public List<Fornecedor> Consult()
         {
-            using (BDCADASTROEntitiesContext context = new BDCADASTROEntitiesContext())
+            using (BDCADASTROEntities context = new BDCADASTROEntities())
             {
                 return context.Fornecedor.ToList();
             }

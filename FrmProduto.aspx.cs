@@ -48,7 +48,7 @@ namespace WebApplication1
                 Consulta(int.Parse(txtCodigoProduto.Text));
             }
             else
-                ConsultarSemId();// ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Informe o ID Fornecedor') ", true);
+                ConsultarSemId();
         }
         protected void ConsultarSemId()
         {
@@ -86,11 +86,11 @@ namespace WebApplication1
 
             if (result != null)
             {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Erro ao excluir') ", true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Excluido com sucesso') ", true);                
                 LimparTela();
             }
             else
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Excluido com sucesso') ", true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Erro ao excluir') ", true);
         }
 
         protected void btnInserir_Click(object sender, EventArgs e)
@@ -112,10 +112,12 @@ namespace WebApplication1
 
         public void LimparTela()
         {
-            txtCodigoProduto.Text = " ";
-            txtDescricaoProduto.Text = " ";
-            txtDtCadastroProduto.Text = " ";
-            txtValorProduto.Text = " ";
+            txtCodigoProduto.Text = string.Empty;
+            txtDescricaoProduto.Text = string.Empty;
+            txtDtCadastroProduto.Text = string.Empty;
+            txtValorProduto.Text = string.Empty;
+            gdvGridview.DataSource = null;
+            gdvGridview.DataBind();
         }
     }
 }

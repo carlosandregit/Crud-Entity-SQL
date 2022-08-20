@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="BDCADASTROModelBase.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="BDCADASTROModelContext.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Fornecedor">
           <Key>
             <PropertyRef Name="IdFornecedor" />
@@ -18,9 +18,10 @@
         </EntityType>
         <EntityType Name="Pedidos">
           <Key>
-            <PropertyRef Name="CodigoPedido" />
+            <PropertyRef Name="Sequencial" />
           </Key>
-          <Property Name="CodigoPedido" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Sequencial" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CodigoPedido" Type="int" Nullable="false" />
           <Property Name="DtPedido" Type="date" />
           <Property Name="Produto" Type="int" Nullable="false" />
           <Property Name="QtProduto" Type="int" />
@@ -60,7 +61,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="BDCADASTROModelBaseStoreContainer">
+        <EntityContainer Name="BDCADASTROModelContextStoreContainer">
           <EntitySet Name="Fornecedor" EntityType="Self.Fornecedor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pedidos" EntityType="Self.Pedidos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Produto" EntityType="Self.Produto" Schema="dbo" store:Type="Tables" />
@@ -77,7 +78,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="BDCADASTROModelBase" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="BDCADASTROModelContext" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Fornecedor">
           <Key>
             <PropertyRef Name="IdFornecedor" />
@@ -92,9 +93,10 @@
         </EntityType>
         <EntityType Name="Pedidos">
           <Key>
-            <PropertyRef Name="CodigoPedido" />
+            <PropertyRef Name="Sequencial" />
           </Key>
-          <Property Name="CodigoPedido" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Sequencial" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CodigoPedido" Type="Int32" Nullable="false" />
           <Property Name="DtPedido" Type="DateTime" Precision="0" />
           <Property Name="Produto" Type="Int32" Nullable="false" />
           <Property Name="QtProduto" Type="Int32" />
@@ -137,7 +139,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="BDCADASTROEntitiesContext" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="BDCADASTROEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Fornecedor" EntityType="Self.Fornecedor" />
           <EntitySet Name="Pedidos" EntityType="Self.Pedidos" />
           <EntitySet Name="Produto" EntityType="Self.Produto" />
@@ -155,9 +157,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="BDCADASTROModelBaseStoreContainer" CdmEntityContainer="BDCADASTROEntitiesContext">
+        <EntityContainerMapping StorageEntityContainer="BDCADASTROModelContextStoreContainer" CdmEntityContainer="BDCADASTROEntities">
           <EntitySetMapping Name="Fornecedor">
-            <EntityTypeMapping TypeName="BDCADASTROModelBase.Fornecedor">
+            <EntityTypeMapping TypeName="BDCADASTROModelContext.Fornecedor">
               <MappingFragment StoreEntitySet="Fornecedor">
                 <ScalarProperty Name="RazaoSocial" ColumnName="RazaoSocial" />
                 <ScalarProperty Name="IdFornecedor" ColumnName="IdFornecedor" />
@@ -169,8 +171,9 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Pedidos">
-            <EntityTypeMapping TypeName="BDCADASTROModelBase.Pedidos">
+            <EntityTypeMapping TypeName="BDCADASTROModelContext.Pedidos">
               <MappingFragment StoreEntitySet="Pedidos">
+                <ScalarProperty Name="Sequencial" ColumnName="Sequencial" />
                 <ScalarProperty Name="CodigoPedido" ColumnName="CodigoPedido" />
                 <ScalarProperty Name="DtPedido" ColumnName="DtPedido" />
                 <ScalarProperty Name="Produto" ColumnName="Produto" />
@@ -181,7 +184,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Produto">
-            <EntityTypeMapping TypeName="BDCADASTROModelBase.Produto">
+            <EntityTypeMapping TypeName="BDCADASTROModelContext.Produto">
               <MappingFragment StoreEntitySet="Produto">
                 <ScalarProperty Name="Codigo" ColumnName="Codigo" />
                 <ScalarProperty Name="Descricao" ColumnName="Descricao" />

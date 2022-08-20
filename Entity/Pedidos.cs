@@ -7,20 +7,27 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WebApplication1
+namespace WebApplication1.Entity
 {
     using System;
     using System.Collections.Generic;
-    
+    using WebApplication1.DTO;
+
     public partial class Pedidos
     {
+        public Pedidos()
+        {
+            Produtos = new List<ItemPedidoDTO>();
+        }
+       
+        public int Sequencial { get; set; }
         public int CodigoPedido { get; set; }
         public Nullable<System.DateTime> DtPedido { get; set; }
         public int Produto { get; set; }
         public Nullable<int> QtProduto { get; set; }
         public int Fornecedor { get; set; }
         public Nullable<decimal> VlrTotalPedido { get; set; }
-    
+        public List<ItemPedidoDTO> Produtos { get; set; }
         public virtual Fornecedor Fornecedor1 { get; set; }
         public virtual Produto Produto1 { get; set; }
     }

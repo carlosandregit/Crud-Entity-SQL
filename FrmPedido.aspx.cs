@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using WebApplication1.Entity;
 using WebApplication1.Repository;
 
 namespace WebApplication1
@@ -23,11 +21,13 @@ namespace WebApplication1
                 produtoRepository = new ProdutoRepository();
 
                  fornecedorRepository.Consult().ForEach(fornecedor => {
-                     ddlFornecedorPedido.Items.Add(new ListItem(fornecedor.NomeContato.ToString(), fornecedor.IdFornecedor.ToString()));
+                     if(fornecedor.NomeContato != null)
+                        ddlFornecedorPedido.Items.Add(new ListItem(fornecedor.NomeContato.ToString(), fornecedor.IdFornecedor.ToString()));
                  });
 
                 produtoRepository.Consult().ForEach(produto => {
-                    ddlProduto.Items.Add(new ListItem(produto.Descricao.ToString(), produto.Codigo.ToString()));
+                    if(produto.Descricao != null)
+                        ddlProduto.Items.Add(new ListItem(produto.Descricao.ToString(), produto.Codigo.ToString()));
                 });
 
                 if (pedidos == null)
@@ -47,12 +47,15 @@ namespace WebApplication1
 
             if (result != null)
             {
-                txtCodigoPedido.Text = result.CodigoPedido.ToString();
-                txtDtPedido.Text =  result.DtPedido.ToString();
-                //txtProduto.Text = result.Produto.ToString();
-                txtQtProduto.Text = result.QtProduto.ToString();
-                //txtFornecedorPedido.Text = result.Fornecedor.ToString();
-                txtVlTotalPedido.Text = result.VlrTotalPedido.ToString();
+                //txtCodigoPedido.Text = result.CodigoPedido.ToString();
+                //txtDtPedido.Text =  result.DtPedido.ToString();
+                ////txtProduto.Text = result.Produto.ToString();
+                //txtQtProduto.Text = result.QtProduto.ToString();
+                ////txtFornecedorPedido.Text = result.Fornecedor.ToString();
+                //txtVlTotalPedido.Text = result.VlrTotalPedido.ToString();
+
+                gdvGridview.DataSource = result;
+                gdvGridview.DataBind();
             }
             else
             {
@@ -115,11 +118,11 @@ namespace WebApplication1
         }
 
         protected void btnInserir_Click(object sender, EventArgs e)
-        {
+        {            
             pedidoRepository = new PedidoRepository();
             pedidos.DtPedido = Convert.ToDateTime(txtDtPedido.Text);
             pedidos.QtProduto = int.Parse(txtQtProduto.Text);
-            pedidos.Fornecedor1 = new Fornecedor() { IdFornecedor = Convert.ToInt32( ddlFornecedorPedido.SelectedValue)};
+            pedidos.Fornecedor = Convert.ToInt32(ddlFornecedorPedido.SelectedValue);
     
             var result = pedidoRepository.InserRegistro(pedidos);
             if (result != null)
@@ -137,12 +140,19 @@ namespace WebApplication1
 
         public void LimparTela()
         {
-            txtCodigoPedido.Text = " ";
-            txtDtPedido.Text = " ";
+            txtCodigoPedido.Text = string.Empty;
+            txtDtPedido.Text = DateTime.Now.ToString("dd-MM-yyyy");
             ddlFornecedorPedido.SelectedIndex = -1;
-            txtQtProduto.Text = " ";
+            txtQtProduto.Text = "1";
             ddlProduto.SelectedIndex = -1;
-            txtVlTotalPedido.Text = " ";
+            txtVlTotalPedido.Text = "0";
+            gdvGridview.DataSource = null;
+            gdvGridview.DataBind();
+            if(pedidos != null)
+            {
+                pedidos.Produtos.Clear();
+            }
+            
           
         }
 

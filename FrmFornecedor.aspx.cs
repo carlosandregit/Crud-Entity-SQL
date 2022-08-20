@@ -122,12 +122,14 @@ namespace WebApplication1
 
         public void LimparTela()
         {
-            txtIdFornecedor.Text = " ";
-            txtRazaoSocial.Text = " ";
-            txtCNPJ.Text = " ";
-            txtUF.Text = " ";
-            txtEmail.Text = " ";
-            txtNomeContato.Text = " ";
+            txtIdFornecedor.Text = string.Empty;
+            txtRazaoSocial.Text = string.Empty;
+            txtCNPJ.Text = string.Empty;
+            txtUF.Text = string.Empty;
+            txtEmail.Text = string.Empty;
+            txtNomeContato.Text = string.Empty;
+            gdvGridview.DataSource = null;
+            gdvGridview.DataBind();
         }
     }
 }

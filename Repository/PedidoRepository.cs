@@ -2,22 +2,23 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using WebApplication1.Entity;
 
 namespace WebApplication1.Repository
 {
     public class PedidoRepository
     {
-        public Pedidos ConsultarPorID(int id)
+        public List<Pedidos> ConsultarPorID(int id)
         {
-            using (BDCADASTROEntitiesContext context = new BDCADASTROEntitiesContext())
+            using (BDCADASTROEntities context = new BDCADASTROEntities())
             {
-                return context.Pedidos.Find(id);
+                return context.Pedidos.Where(pedido => pedido.CodigoPedido == id).ToList();
             }
         }
 
         public Pedidos AlterarPorId(int id, DateTime dtPedido, int produto, int qtProduto, int fornecedor, decimal vlrTotalPedido)
         {
-            using (BDCADASTROEntitiesContext context = new BDCADASTROEntitiesContext())
+            using (BDCADASTROEntities context = new BDCADASTROEntities())
             {
                 Pedidos p = context.Pedidos.FirstOrDefault(x => x.CodigoPedido == id);
                 p.DtPedido = dtPedido;
@@ -33,7 +34,7 @@ namespace WebApplication1.Repository
 
         public Pedidos DeletarRegistro(int id)
         {
-            using (BDCADASTROEntitiesContext context = new BDCADASTROEntitiesContext())
+            using (BDCADASTROEntities context = new BDCADASTROEntities())
             {
                 Pedidos p = context.Pedidos.FirstOrDefault(x => x.CodigoPedido == id);
                 context.Pedidos.Remove(p);
@@ -45,22 +46,23 @@ namespace WebApplication1.Repository
 
         public Pedidos InserRegistro(Pedidos pedidos)
         {
-            using (BDCADASTROEntitiesContext context = new BDCADASTROEntitiesContext())
+            using (BDCADASTROEntities context = new BDCADASTROEntities())
             {
-                var max = context.Pedidos.Max(p => p.CodigoPedido);
-                if (max == 0)
-                    max = 0;
+                var list = context.Pedidos.ToList();
+                var max = 0;
+
+                if (list.Count > 0)
+                    max = list.Max(p => p.CodigoPedido);              
 
                 var codigoPedido = max + 1;
                 pedidos.Produtos.ForEach(item => {
 
-                    pedidos.Produto1 = item.Produto;
+                    pedidos.Produto = item.Produto.Codigo;
                     pedidos.VlrTotalPedido = item.Quantidade * item.Produto.ValorProduto;
                     pedidos.CodigoPedido = codigoPedido;
                     context.Pedidos.Add(pedidos);
+                    context.SaveChanges();
                 });             
-                
-                context.SaveChanges();
 
                 return pedidos;
             }
@@ -68,7 +70,7 @@ namespace WebApplication1.Repository
 
         public List<Pedidos> Consult()
         {
-            using (BDCADASTROEntitiesContext context = new BDCADASTROEntitiesContext())
+            using (BDCADASTROEntities context = new BDCADASTROEntities())
             {
                 return context.Pedidos.ToList();
             }

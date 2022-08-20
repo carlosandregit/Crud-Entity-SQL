@@ -82,12 +82,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="EntityBase.Context.tt">
+    <Content Include="Entity\EntityBase.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>EntityBase.edmx</DependentUpon>
       <LastGenOutput>EntityBase.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="EntityBase.tt">
+    <Content Include="Entity\EntityBase.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>EntityBase.edmx</DependentUpon>
       <LastGenOutput>EntityBase.cs</LastGenOutput>
@@ -100,20 +100,29 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DTO\ItemPedidoDTO.cs" />
-    <Compile Include="EntityBase.Context.cs">
+    <Compile Include="Entity\EntityBase.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>EntityBase.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityBase.cs">
+    <Compile Include="Entity\EntityBase.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>EntityBase.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityBase.Designer.cs">
+    <Compile Include="Entity\EntityBase.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>EntityBase.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\Fornecedor.cs">
+      <DependentUpon>EntityBase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\Pedidos.cs">
+      <DependentUpon>EntityBase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\Produto.cs">
+      <DependentUpon>EntityBase.tt</DependentUpon>
     </Compile>
     <Compile Include="FrmFornecedor.aspx.cs">
       <DependentUpon>FrmFornecedor.aspx</DependentUpon>
@@ -122,18 +131,12 @@
     <Compile Include="FrmFornecedor.aspx.designer.cs">
       <DependentUpon>FrmFornecedor.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Fornecedor.cs">
-      <DependentUpon>EntityBase.tt</DependentUpon>
-    </Compile>
     <Compile Include="FrmPedido.aspx.cs">
       <DependentUpon>FrmPedido.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="FrmPedido.aspx.designer.cs">
       <DependentUpon>FrmPedido.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Pedidos.cs">
-      <DependentUpon>EntityBase.tt</DependentUpon>
     </Compile>
     <Compile Include="Principal.aspx.cs">
       <DependentUpon>Principal.aspx</DependentUpon>
@@ -149,21 +152,17 @@
     <Compile Include="FrmProduto.aspx.designer.cs">
       <DependentUpon>FrmProduto.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Produto.cs">
-      <DependentUpon>EntityBase.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ProjetoContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\FornecedorRepository.cs" />
     <Compile Include="Repository\PedidoRepository.cs" />
     <Compile Include="Repository\ProdutoRepository.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="EntityBase.edmx">
+    <EntityDeploy Include="Entity\EntityBase.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>EntityBase.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="EntityBase.edmx.diagram">
+    <Content Include="Entity\EntityBase.edmx.diagram">
       <DependentUpon>EntityBase.edmx</DependentUpon>
     </Content>
     <None Include="packages.config" />
@@ -175,7 +174,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Entity\" />
     <Folder Include="img\" />
   </ItemGroup>
   <ItemGroup>

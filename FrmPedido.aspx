@@ -44,7 +44,7 @@
 
         .btn {
             padding: 0.3rem 0.5rem;
-            margin-left: 168px;
+            margin-left: 175px;
         }
     </style>
 </head>
@@ -68,13 +68,11 @@
                 <div class="input">
                     <asp:TextBox ID="txtCodigoPedido" runat="server" Width="100px" type="number"></asp:TextBox>
                     <asp:TextBox ID="txtDtPedido" runat="server" Width="100px" Enabled="false"></asp:TextBox>
-                    <%--<asp:TextBox ID="txtProduto" runat="server" Width="350px"></asp:TextBox>--%>
                     <asp:DropDownList ID="ddlProduto" runat="server" Width="350px"></asp:DropDownList>
                     <div>
                         <asp:TextBox ID="txtQtProduto" runat="server" Width="100px" type="number" Text="1"></asp:TextBox>
                         <asp:Button ID="btnAdd" runat="server" Text="Adcionar Produto" OnClick="btnAdd_Click" UseSubmitBehavior="false" />
-                    </div>                    
-                    <%--<asp:TextBox ID="txtFornecedorPedido" runat="server" Width="350px"></asp:TextBox>--%>
+                    </div>                               
                     <asp:DropDownList ID="ddlFornecedorPedido" runat="server" Width="350px"></asp:DropDownList>
                     <asp:TextBox ID="txtVlTotalPedido" runat="server" Width="100px" Enabled="false" Text="0"></asp:TextBox>
 
@@ -92,12 +90,7 @@
             <br /><br />
               <div class="grid">
                 <asp:GridView ID="gdvGridview" runat="server" AutoGenerateColumns="true" >
-                  <%--  <Columns>
-                        <asp:BoundField DataField="Codigo" HeaderText="CodigoProduto" ItemStyle-Width="80" ItemStyle-HorizontalAlign="Center"/>
-                        <asp:BoundField DataField="Descricao" HeaderText="DescricaoProduto" ItemStyle-Width="80" ItemStyle-HorizontalAlign="Center"/>
-                        <asp:BoundField DataField="DtCadastro" HeaderText="DtCadastroProduto" ItemStyle-Width="80" ItemStyle-HorizontalAlign="Center"/>
-                        <asp:BoundField DataField="ValorProduto" HeaderText="ValorProduto" ItemStyle-Width="80" ItemStyle-HorizontalAlign="Center"/>                      
-                    </Columns> --%>                   
+                              
                 </asp:GridView>
             </div>
         </div>
