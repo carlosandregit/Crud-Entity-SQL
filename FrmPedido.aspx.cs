@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Data;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using WebApplication1.Entity;
@@ -47,7 +49,7 @@ namespace WebApplication1
                 var result = pedidoRepository.ConsultarPorID(id);
 
                 if (result != null)
-                {                  
+                {                                      
                     gdvGridview.DataSource = result;
                     gdvGridview.DataBind();
                 }
@@ -209,6 +211,24 @@ namespace WebApplication1
             {
                 throw new Exception("Erro, procure a equipe técnica: "+ ex.Message);
             }           
+        }
+
+
+        protected void gdvGridview_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string id = gdvGridview.SelectedRow.Cells[1].Text;           
+
+            pedidoRepository = new PedidoRepository();
+            var result = pedidoRepository.ConsultarPorID(Convert.ToInt32(id));
+
+            txtCodigoPedido.Text = result.CodigoPedido.ToString();
+            txtDtPedido.Text = result.DtPedido.ToString();
+            ddlProduto.SelectedValue = result.Produto.ToString();
+            txtQtProduto.Text = result.QtProduto.ToString();
+            ddlFornecedorPedido.SelectedValue = result.Fornecedor.ToString();
+            txtVlTotalPedido.Text = result.VlrTotalPedido.ToString();
+
+
         }
     }
 }

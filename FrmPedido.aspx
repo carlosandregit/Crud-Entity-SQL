@@ -88,8 +88,16 @@
 
             <br /><br />
               <div class="grid">
-                <asp:GridView ID="gdvGridview" runat="server" AutoGenerateColumns="true" >
-                              
+                <asp:GridView ID="gdvGridview" runat="server" AutoGenerateColumns="true" AutoGenerateSelectButton="true" OnSelectedIndexChanged="gdvGridview_SelectedIndexChanged">
+                    <Columns>
+                        <%--OnSelectedIndexChanging="gdvGridview_SelectedIndexChanging"--%>
+                       <%-- <asp:BoundField DataField="Id" HeaderText="ID" />
+                        <asp:BoundField DataField="Id" HeaderText="ID" />
+                        <asp:BoundField DataField="Id" HeaderText="ID" />
+                        <asp:BoundField DataField="Id" HeaderText="ID" />
+                        <asp:BoundField DataField="Id" HeaderText="ID" />
+                        <asp:BoundField DataField="Id" HeaderText="ID" />--%>
+                    </Columns>                              
                 </asp:GridView>
             </div>
         </div>
