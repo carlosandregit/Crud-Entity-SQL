@@ -12,7 +12,7 @@ namespace WebApplication1.Repository
         {
             using (BDCADASTROEntities context = new BDCADASTROEntities())
             {
-                return context.Pedidos.Where(pedido => pedido.CodigoPedido == id).ToList();
+                return context.Pedidos.Where(x => x.Sequencial == id).ToList();
             }
         }
 
@@ -20,7 +20,7 @@ namespace WebApplication1.Repository
         {
             using (BDCADASTROEntities context = new BDCADASTROEntities())
             {
-                Pedidos p = context.Pedidos.FirstOrDefault(x => x.CodigoPedido == id);
+                Pedidos p = context.Pedidos.FirstOrDefault(x => x.Sequencial == id);
                 p.DtPedido = dtPedido;
                 p.Produto = produto;
                 p.QtProduto = qtProduto;

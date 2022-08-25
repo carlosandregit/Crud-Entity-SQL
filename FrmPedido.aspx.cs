@@ -108,7 +108,7 @@ namespace WebApplication1
                     if (result != null)
                     {
                         ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Alterado com sucesso') ", true);
-                        Consulta(result.CodigoPedido);
+                        Consulta(result.Sequencial);
                     }
                     else
                     {
@@ -221,14 +221,16 @@ namespace WebApplication1
             pedidoRepository = new PedidoRepository();
             var result = pedidoRepository.ConsultarPorID(Convert.ToInt32(id));
 
-            txtCodigoPedido.Text = result.CodigoPedido.ToString();
-            txtDtPedido.Text = result.DtPedido.ToString();
-            ddlProduto.SelectedValue = result.Produto.ToString();
-            txtQtProduto.Text = result.QtProduto.ToString();
-            ddlFornecedorPedido.SelectedValue = result.Fornecedor.ToString();
-            txtVlTotalPedido.Text = result.VlrTotalPedido.ToString();
-
-
+            foreach (var item in result)
+            {
+               
+                txtCodigoPedido.Text = item.Sequencial.ToString();
+                txtDtPedido.Text = item.DtPedido.ToString();
+                ddlProduto.SelectedValue = item.Produto.ToString();
+                txtQtProduto.Text = item.QtProduto.ToString();
+                ddlFornecedorPedido.SelectedValue = item.Fornecedor.ToString();
+                txtVlTotalPedido.Text = item.VlrTotalPedido.ToString();
+            }          
         }
     }
 }
